@@ -1,0 +1,6 @@
+sensors for right and left hand
+
+Different info tabs
+that are customizable
+
+Speedometer - Slope Meter - Car stats?
