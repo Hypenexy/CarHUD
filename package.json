@@ -1,0 +1,19 @@
+{
+  "name": "carhud",
+  "version": "1.0.0",
+  "description": "Car heads up display",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hypenexy/CarHUD.git"
+  },
+  "author": "Georgi Murlev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hypenexy/CarHUD/issues"
+  },
+  "homepage": "https://github.com/Hypenexy/CarHUD#readme"
+}
