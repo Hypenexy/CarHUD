@@ -48,7 +48,7 @@ function show_warning(data){
     app.appendChild(element);
 }
 
-function remove_warning(data){ // havent tested this
+function remove_warning(data){
     const elements = app.querySelectorAll(`div.warning[error="${data}"]`);
     for (let i = 0; i < elements.length; i++) {
         elements[i].remove();
