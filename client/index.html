@@ -1,38 +1,13 @@
 <!doctype html>
 <html>
-   <head>
-
-      <title>Communicating from Node.js to an Arduino</title>
-      <script src='/socket.io/socket.io.js'></script>
-
-   </head>
-   <body>
-
-      <h1>Communicating from Node.js to an Arduino</h1>
-
-      <button id="sensorOn">Turn On</button>
-      <button id="sensorOff">Turn Off</button>
-
-      <script>
-
-        var socket = io();
-
-        document.getElementById('sensorOn').onclick = function() {
-            socket.emit('toggle', true, (result) => {
-                console.log(result);
-            });
-        };
-
-        document.getElementById('sensorOff').onclick = function(){               
-            socket.emit('toggle', false, (result) => {
-                console.log(result);
-            });
-        };
-        socket.on("data", function(data){
-            console.log(data);
-        });
-
-      </script>
-
-   </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CarHUD</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <script src='/socket.io/socket.io.js'></script>
+        <script src="code.js"></script>
+    </body>
 </html>
