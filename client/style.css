@@ -16,7 +16,7 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url("font/Material-Icons-Outlined.woff2") format('woff2');
+    src: url("Material-Icons-Outlined.woff2") format('woff2');
 }
 
 .m-i{
@@ -34,6 +34,52 @@ app{
     background: #000;
     color: #eee;
 }
+
+app.mirror{
+    scale: 1 -1;
+}
+
+.left, .right{
+    position: absolute;
+    z-index: 10;
+    width: 30%;
+    height: 100%;
+    top: 0;
+    animation-name: smoothVisual;
+    animation-duration: 1s;
+}
+.left.hide, .right.hide{
+    animation-name: smoothVisualReverse;
+    animation-duration: .5s;
+}
+.left{
+    left: 0;
+    border-radius: 0 36% 36% 0;
+    background-color: #F3595922;
+}
+.right{
+    right: 0;
+    border-radius: 36% 0 0 36%;
+    background-color: #59F39722;
+}
+
+@keyframes smoothVisual {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes smoothVisualReverse {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
 
 .logo{
     user-select: none;
@@ -174,4 +220,25 @@ app{
 }
 .call .actions .btn:last-child .m-i{
     transform: scaleX(-1);
+}
+
+.call .actions .btn.accepted .m-i,
+.call .actions .btn.accepted .text{
+    transform: translateY(-15px);
+    opacity: 0;
+    transition: .2s;
+}
+
+.call.accepted{
+    animation: initial;
+    border: 2px solid #eee;
+    opacity: .3;
+    transition: .5s;
+}
+
+.call.declined, .call.hangup{
+    opacity: 0;
+    transform: translateX(-70%);
+    border: 2px solid #F35959;
+    transition: .5s;
 }

@@ -1,4 +1,4 @@
-const arduino_port = 'COM5';
+const arduino_port = 'COM3';
 const http_port = 3000;
 
 // Server
@@ -76,10 +76,10 @@ io.on('connection', function(socket){
     socket.on('toggle', function(data, callback){
         if(typeof data == "boolean"){
             if(data == true){
-                port.write("trueee");
+                port.write("toggleOn");
             }
             else{
-                port.write("false ;(");
+                port.write("toggleOff");
             }
         }
         else{

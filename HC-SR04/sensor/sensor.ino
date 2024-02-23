@@ -1,7 +1,7 @@
 const int sensor1_trigPin = 9;
 const int sensor1_echoPin = 10;
-// const int sensor2_trigPin = 5;
-// const int sensor2_echoPin = 6;
+const int sensor2_trigPin = 5;
+const int sensor2_echoPin = 6;
 
 float duration1, distance1, duration2, distance2;
 
@@ -13,8 +13,8 @@ bool device_active = true;
 void setup() {
   pinMode(sensor1_trigPin, OUTPUT);
   pinMode(sensor1_echoPin, INPUT);
-  // pinMode(sensor2_trigPin, OUTPUT);
-  // pinMode(sensor2_echoPin, INPUT);
+  pinMode(sensor2_trigPin, OUTPUT);
+  pinMode(sensor2_echoPin, INPUT);
   Serial.begin(9600);
 }
 
@@ -29,7 +29,10 @@ void loop() {
     
     // Serial.println(receivedString);
     
-    if(receivedString == "1"){
+    if(receivedString == "toggleOn"){
+      device_active = true;
+    }
+    if(receivedString == "toggleOff"){
       device_active = false;
     }
 
@@ -40,20 +43,36 @@ void loop() {
 
   if(device_active == true){
     digitalWrite(sensor1_trigPin, LOW);
-    // digitalWrite(sensor2_trigPin, LOW);
     delayMicroseconds(2);
     digitalWrite(sensor1_trigPin, HIGH);
-    // digitalWrite(sensor2_trigPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(sensor1_trigPin, LOW);
-    // digitalWrite(sensor2_trigPin, LOW);
 
     duration1 = pulseIn(sensor1_echoPin, HIGH);
     distance1 = (duration1*.0343)/2;
+
+    delay(100);
+    
+    digitalWrite(sensor2_trigPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(sensor2_trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(sensor2_trigPin, LOW);
+
+    duration2 = pulseIn(sensor2_echoPin, HIGH);
+    distance2 = (duration2*.0343)/2;
+
     if(debug){
       Serial.print("Distance 1: ");
       Serial.print(distance1);
       Serial.println("cm");
+      Serial.print("Distance 2: ");
+      Serial.print(duration2);
+      Serial.println("cm");
+    }
+
+    if(distance1 > 0 && expected_ceiling_distance < 5){
+      Serial.println("Resolved: Sensor not working!");
     }
 
     if(expected_ceiling_distance < 5){
@@ -69,9 +88,15 @@ void loop() {
       }
     }
 
-    if(distance1 > 0 && expected_ceiling_distance == 0){
-      Serial.println("Resolved: Sensor not working!");
+    if(expected_ceiling_distance > 14){
+      if(distance1 < expected_ceiling_distance - 10){
+        Serial.println("Action: Left");
+      }
+      if(distance2 < expected_ceiling_distance - 10){
+        Serial.println("Action: Right");
+      }
     }
+
 
     // if(expected_ceiling_distance)
 
