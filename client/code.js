@@ -1,11 +1,16 @@
-/*
-        <h1>CarHUD</h1>
-        <button id="sensorOn">Turn On</button>
-        <button id="sensorOff">Turn Off</button>
-*/
-
 const app = document.createElement("app");
 document.body.appendChild(app);
+
+const mirror = document.createElement("div");
+mirror.classList.add("mirror");
+app.appendChild(mirror);
+
+function createElement(name, parent){
+    const element = document.createElement("div");
+    element.classList.add(name);
+    parent.appendChild(element);
+    return element;
+}
 
 const logo = document.createElement("h1");
 logo.textContent = "CarHUD";
@@ -67,9 +72,7 @@ socket.on("resolve", function(data){
 // Borders
 
 function show_borders(){
-    const element = document.createElement("div");
-    element.classList.add("border");
-    app.appendChild(element);
+    createElement("border", app);
 }
 
 function hide_borders(){
@@ -81,6 +84,51 @@ function hide_borders(){
 
 // Call
 
-function phone_ringing(){
+var contacts = {
+    359898777294: {
+        name: "Georgi Murlev",
+        picture: ""
+    },
+};
+
+function phone_ringing(number){
+    const contact = {};
+    const contactId = number.toString();
+    if(Object.keys(contacts).includes(contactId)){
+        contact.name = contacts[contactId].name;
+    }
+    else{
+        contact.name = number;
+    }
+
+    const call = createElement("call", app);
+    const headerText = createElement("headerText", call);
+    headerText.textContent = "Incoming call";
+
+    const info = createElement("info", call);
+
+    const picture = createElement("picture", info);
+    picture.classList.add("m-i");
+    if(!contact.picture){
+        picture.classList.add("icon");
+    }
+    picture.textContent = "person";
+    const name = createElement("name", info);
+    name.textContent = contact.name;
     
+    const actions = createElement("actions", call)
+    
+    const btn_1 = createElement("btn", actions);
+    const decline_btn = createElement("m-i", btn_1);
+    decline_btn.textContent = "front_hand";
+    const decline_text = createElement("text", btn_1);
+    decline_text.textContent = "Decline";
+
+    const btn_2 = createElement("btn", actions);
+    const accept_btn = createElement("m-i", btn_2);
+    accept_btn.textContent = "front_hand";
+    const accept_text = createElement("text", btn_2);
+    accept_text.textContent = "Accept";
 }
+
+phone_ringing(359898777294);

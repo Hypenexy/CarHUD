@@ -1,4 +1,4 @@
-const arduino_port = 'COM3';
+const arduino_port = 'COM5';
 const http_port = 3000;
 
 // Server

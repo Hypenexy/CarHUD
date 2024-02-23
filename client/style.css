@@ -16,7 +16,7 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url("Material-Icons-Outlined.woff2") format('woff2');
+    src: url("font/Material-Icons-Outlined.woff2") format('woff2');
 }
 
 .m-i{
@@ -57,7 +57,7 @@ app{
     height: 100%;
 
 
-    /* background-color: #000000; */
+    background-color: #000000;
     border: 2px solid #cf0000;
     border-radius: 24px;
 
@@ -93,4 +93,85 @@ app{
     width: 100%;
     height: 100%;
     border: 10px dashed #fce93c;
+}
+
+.call{
+    padding: 24px 64px;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    max-width: 700px;
+    width: 100%;
+    max-height: 400px;
+    height: 100%;
+
+    /* background-color: #000000;
+    border: 2px solid #cf0000; */
+    border: 2px solid #59F397;
+    box-shadow: 0 0 12px #59F397;
+    border-radius: 24px;
+
+    animation: 
+        pendingcall 2s infinite cubic-bezier(0.075, 0.82, 0.165, 1),
+        popin .2s;
+}
+/* .call{
+    background-color: #fff;
+    color: #000;
+} */
+
+@keyframes pendingcall {
+    0%{
+        box-shadow: 0 0 4px #59F397;
+    }
+    50%{
+        box-shadow: 0 0 12px #59F397;
+    }
+    100%{
+        box-shadow: 0 0 4px #59F397;
+    }
+}
+
+.call .headerText{
+    font-size: 24px;
+}
+
+.call .info{
+    width: 100%;
+    height: 50%;
+    /* padding: 48px; */
+    display: flex;
+    align-items: center;
+
+    font-size: 36px;
+}
+.call .info .picture.icon{
+    font-size: 48px;
+}
+.call .info .picture:not(.icon){
+    width: 64px;
+    height: 64px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.call .actions .btn{
+    display: inline-block;
+    text-align: center;
+    font-size: 28px;
+}
+.call .actions .btn .m-i{
+    font-size: 64px;
+}
+.call .actions .btn:first-child{
+    color: #F35959;
+}
+.call .actions .btn:last-child{
+    color: #59F397;
+    float: right;
+}
+.call .actions .btn:last-child .m-i{
+    transform: scaleX(-1);
 }
